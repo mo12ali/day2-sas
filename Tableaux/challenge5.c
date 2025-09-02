@@ -8,7 +8,7 @@ int main(){
     int *tab;
     int taille;
     int i,j,k;
-    int max = 0;
+    int min = 0;
     printf("entrez le nombre des elements du tableau\n");
     scanf("%d",&taille);
     tab = (int *)malloc(taille*sizeof(int));
@@ -27,12 +27,12 @@ int main(){
     }
     printf(" ]");
 
-    max = tab[0];
+    min = tab[0];
     for(j = 1;j<taille;j++){
-        if(max < tab[j])
-            max = tab[j];
+        if(min > tab[j])
+            min = tab[j];
     }
 
-    printf("\nle nombre max est %d ",max);
+    printf("\nle nombre min est %d ",min);
 
 }
