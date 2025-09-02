@@ -5,9 +5,11 @@
 int main(){
 
 
-    int taille, *tab;
+    int *tab;
+    int taille;
     int i,j,k;
-    printf("entrez la taille du tableau ");
+    int max = 0;
+    printf("entrez le nombre des elements du tableau\n");
     scanf("%d",&taille);
     tab = (int *)malloc(taille*sizeof(int));
     
@@ -18,17 +20,19 @@ int main(){
         printf("\n");
     }
     
-    int somme = 0;
-    for(j = 0;j<taille; j++){
-       somme += tab[j];
-    }
     printf("l'affichage du tableau est : ");
     printf("[ ");
     for(k = 0;k<taille; k++){
         printf("%d, ",tab[k]);
     }
     printf(" ]");
-    printf("\nla somme est : ");
-    printf("%d",somme);
-    return 0;
+
+    max = tab[0];
+    for(j = 1;j<taille;j++){
+        if(max < tab[j])
+            max = tab[j];
+    }
+
+    printf("\nle nombre max est %d ",max);
+
 }
