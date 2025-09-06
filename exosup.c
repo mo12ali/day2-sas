@@ -22,7 +22,7 @@ int main(){
     scanf("%d %d",&id,&n);
 
    
-
+//test
 
     for(int i = 0; i<sizeof(stock)/sizeof(produits); i++){
         if(stock[i].nb == id){
