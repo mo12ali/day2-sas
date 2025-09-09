@@ -24,7 +24,6 @@ carnet init_carnet()
     init.size = 0;
     init.capacity = 0;
 
-    //printf("in init carnet\n");
     return init;
 }
 contact init_contact(char *name, char *telephone, char *email)
@@ -33,11 +32,11 @@ contact init_contact(char *name, char *telephone, char *email)
     strcpy(ct.name, name);
     strcpy(ct.telephone, telephone);
     strcpy(ct.email, email);
-    //printf("in init contact\n");
 
     return ct;
 }
 // 1 ajouter contact
+
 void ajouter_contact(carnet *carnet, contact ct)
 {
     if(carnet->size == carnet->capacity){
@@ -56,13 +55,6 @@ void ajouter_contact(carnet *carnet, contact ct)
     
 }
 // 5 rechercher contact
-/**
- * @brief Le programme permet à l'utilisateur de rechercher un contact par son nom.
- *
-  Si le contact est trouvé, ses détails (nom, numéro de téléphone,
-   adresse e-mail) sont affichés.
- *
- */
 
 void afficher_contact(contact ct)
 {
@@ -70,24 +62,26 @@ void afficher_contact(contact ct)
     printf("=>      contact name : %s , phone number : %s , email : %s      <=\n",ct.name, ct.telephone, ct.email);
 }
 
-void rechercher_contact(carnet cr, contact ct)
+void rechercher_contact(carnet cr, char nm[])
 {
     for (int i = 0; i < cr.size; i++)
     {
-        if (strcmp(cr.contacts[i].name, ct.name) == 0)
+        if (strcmp(cr.contacts[i].name, nm) == 0)
         {
             printf("contact trouve : \n");
             printf("Nom : %s\n", cr.contacts[i].name);
             printf("Telephone : %s\n", cr.contacts[i].telephone);
             printf("Email : %s\n", cr.contacts[i].email);
+        }else{
+            printf(" \n le contact n'existe pas \n");
         }
     }
 }
-int rechercher_contact_index(carnet *cr, contact ct)
+int rechercher_contact_index(carnet *cr, char nm[])
 {
     for (int i = 0; i < cr->size; i++)
     {
-        if (strcmp(cr->contacts[i].name, ct.name) == 0)
+        if (strcmp(cr->contacts[i].name, nm) == 0)
         {
             return i;
         }
@@ -96,27 +90,28 @@ int rechercher_contact_index(carnet *cr, contact ct)
 }
 // 2 supprimer contact
 
-/*
-    0 1 2 3
-    a b c d
-*/
-void supprimer_contact(carnet *cr, contact ct)
+void supprimer_contact(carnet *cr, char nm[])
 {
     int j = 0;
-    // for(int i = 0; i<cr->size ; i++){
-    if ((j = rechercher_contact_index(cr, ct) ) != -1)
-        for (int i = j; i < cr->size - 1; i++)
+    if ((j = rechercher_contact_index(cr, nm) ) != -1){
+         for (int i = j; i < cr->size; i++)
         {
             cr->contacts[i] = cr->contacts[i + 1];
         }
+        printf("le contact existe a la position %d",j);
     cr->size--;
+    }else{
+        printf("le contact n'existe pas");
+    }
+       
 }
 
 // 3 modifier contact
-void modifier_contact(carnet *cr, contact ct, char *new_email, char *new_phone)
+
+void modifier_contact(carnet *cr, char nm[], char *new_email, char *new_phone)
 {
 
-    int pos = rechercher_contact_index(cr, ct);
+    int pos = rechercher_contact_index(cr, nm);
     // cr->contacts[pos].email = new_email;
     strcpy(cr->contacts[pos].email, new_email);
 
@@ -145,11 +140,8 @@ void afficher_contacts(carnet cr)
 int main()
 {   int choix;
     carnet cr = init_carnet();
-    //const char *red     = "\033[0;31m";
-    //const char *green   = "\033[0;32m";
     const char *yellow  = "\033[0;33m";
     const char *blue    = "\033[0;34m";
-    //const char *magenta = "\033[0;35m";
     const char *cyan    = "\033[0;36m";
     const char *reset   = "\033[0m";
 
@@ -187,16 +179,16 @@ int main()
             scanf("%s", new_phone);
             printf("Entrer le nouvel email du contact : ");
             scanf("%s", new_email);
-            contact mod_contact = init_contact(name_mod, "", "");
-            modifier_contact(&cr, mod_contact, new_email, new_phone);
+            //contact mod_contact = init_contact(name_mod, "", "");
+            modifier_contact(&cr, name_mod, new_email, new_phone);
             break;
         case 3:
             /* Supprimer contact  */
             char name_sup[MAX_CHAR];
             printf("Entrer le nom du contact a supprimer : ");
             scanf("%s", name_sup);
-            contact sup_contact = init_contact(name_sup, "", "");
-            supprimer_contact(&cr, sup_contact);   
+            //contact sup_contact = init_contact(name_sup, "", "");
+            supprimer_contact(&cr, name_sup);   
             break;
         case 4:
             /* Afficher contact   */
@@ -207,10 +199,11 @@ int main()
             char name_rech[MAX_CHAR];
             printf("Entrer le nom du contact a rechercher : ");
             scanf("%s", name_rech);
-            contact rech_contact = init_contact(name_rech, "", "");
-            rechercher_contact(cr, rech_contact);
+            //contact rech_contact = init_contact(name_rech, "", "");
+            rechercher_contact(cr, name_rech);
             break;
         case 6:
+            /* Quitter le menu */
             exit(0);
             break;          
         default:
