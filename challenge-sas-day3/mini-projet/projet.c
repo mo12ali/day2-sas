@@ -64,6 +64,8 @@ void afficher_contact(contact ct)
 
 void rechercher_contact(carnet cr, char nm[])
 {
+    const char *red = "\033[0;31m";
+    const char *reset = "\033[0m";
     for (int i = 0; i < cr.size; i++)
     {
         if (strcmp(cr.contacts[i].name, nm) == 0)
@@ -73,7 +75,8 @@ void rechercher_contact(carnet cr, char nm[])
             printf("Telephone : %s\n", cr.contacts[i].telephone);
             printf("Email : %s\n", cr.contacts[i].email);
         }else{
-            printf(" \n le contact n'existe pas \n");
+            printf(" \n %sle contact n'existe pas !!!!%s\n",red,reset);
+            break;
         }
     }
 }
