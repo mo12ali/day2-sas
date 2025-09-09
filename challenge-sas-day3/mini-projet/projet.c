@@ -219,31 +219,7 @@ int main()
             break;
         }
     }while(choix >= 1 || choix <= 6);
-    //menu
-   
     
-    /*contact ct1 = init_contact("Alice", "123456789", "alice@alo.alo");
-    contact ct2 = init_contact("Bob", "987654321", "bob@bob");
-    contact ct3 = init_contact("Charlie", "555555555", "charlie@charlie");*/
-
-
-    /*
-    ajouter_contact(&cr, ct1);
-    //printf("after ajouter contact 1\n");
-    ajouter_contact(&cr, ct2);
-    //printf("after ajouter contact 2\n");
-    ajouter_contact(&cr, ct3);
-    //printf("after ajouter contact 3\n");
-    */
-    /*
-    afficher_contacts(cr);
-    contact ct4 = init_contact("Bob", "", "");
-    rechercher_contact(cr, ct4);
-    modifier_contact(&cr, ct4, "new_bob@bob", "000000000");
-    afficher_contacts(cr);
-    supprimer_contact(&cr, ct4);
-    afficher_contacts(cr);
-    */
 
 
 
